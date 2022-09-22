@@ -1,0 +1,33 @@
+.contactForm {
+    display:flex;
+    flex-direction: column;
+    width: 350px;
+    padding: 20px;
+    border: 2px solid black;
+}
+
+.contactForm__field {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+    width: 170px;
+    font-weight: bold;
+}
+
+.contactForm__input {
+    margin-top: 5px;
+    padding-left: 5px;
+    border-color: rgb(82, 132, 170);
+}
+
+.contactForm__btn {
+    width: 90px;
+    background-color: white;
+    cursor: pointer;
+}
+
+.contactForm__btn:hover,
+.contactForm__btn:focus {
+    background-color: rgb(82, 132, 170);
+    color: white;
+}
