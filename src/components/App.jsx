@@ -12,6 +12,20 @@ export class App extends Component{
     filter: ''
   } 
 
+  componentDidMount() {
+    const parsedContacts = JSON.parse(localStorage.getItem("contacts"));
+    if (parsedContacts) {
+      this.setState({ contacts: parsedContacts });
+    }
+  }
+
+  componentDidUpdate(_, prevState) {
+    const { contacts } = this.state;
+    if (prevState.contacts !== contacts) {
+      localStorage.setItem("contacts", JSON.stringify(contacts));
+    }
+  }
+
   formSubmitHandler = (contact) => {
     if (this.isDublicate(contact)) {
       return alert(`${contact.name} is already in contacts.`)
@@ -66,15 +80,16 @@ export class App extends Component{
 
   render() {
     const { filter } = this.state;
+    const { formSubmitHandler, removeContact, handleChange } = this;
     const contacts = this.getFilteredContacts();
     return (
       <div>
         <h1>Phonebook</h1>
-        <ContactForm onSubmit={this.formSubmitHandler} />
+        <ContactForm onSubmit={formSubmitHandler} />
 
         <h2>Contacts</h2>
-        <Filter filter={filter} onChange={this.handleChange} />
-        <ContactList items={contacts} onRemoveContact={this.removeContact} />
+        <Filter filter={filter} onChange={handleChange} />
+        <ContactList items={contacts} onRemoveContact={removeContact} />
       </div>
     );
   }
